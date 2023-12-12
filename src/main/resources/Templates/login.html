@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Gymplements</title>
+        <meta charset="UTF-8"/>
+    </head>
+
+    <body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0;">
+        <header th:replace="~{layout/plantilla :: header}"/>
+
+        <div class="container my-5" style="flex: 1;">
+            <div class="row align-items-center"> 
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="card col text-center">
+                        <div class="card-header bg-dark text-white"><h2>[[#{login.login}]]</h2></div>
+                        <div class="card-body">
+                            <form method="POST" th:action="@{/login}">
+                                <div class="form-group row my-3">
+                                    <div class="col-md-10 my-auto mx-auto"> 
+                                        <input placeholder="Ingrese su usuario" class="form-control text-center" type="text" name="username" id="username"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row my-3">
+                                    <div class="col-md-10 my-auto mx-auto"> 
+                                        <input placeholder="Ingrese su contraseña" class="form-control text-center" type="password" name="password" id="password"/>
+                                    </div>
+                                </div>
+
+
+
+                                <button class="btn btn-outline-dark" type="submit">
+                                        <span class="btn"><i class="fas fa-sign-in-alt"></i>
+                                            [[#{login.login}]]</span></button>
+                                <br/>
+
+                                <a th:href="@{/registro/recordar}" class="btn-info"> ¿Olvidaste tu contraseña?</a>
+
+                                <hr class="my-3" style="border-top: 2px solid #000; width: 100%;"/>
+                                <div class="">
+                                    <button class="btn btn-outline-dark" >
+                                        <a th:href="@{/registro/nuevo}" class="btn"><i class="fas fa-user-plus"></i> [[#{accion.registrar}]]</a></button>
+
+                                </div>    
+
+                            </form>                            
+                        </div>
+                    </div>
+                    <div th:if="${param.error != null}">
+                        <h3>[[#{error.login}]]</h3>
+                    </div>
+                </div>
+            </div>           
+        </div>
+        <footer th:replace="~{layout/plantilla :: footer}" style="margin-top: auto;"/>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+package com.proyecto.dao;
+
+import com.proyecto.domain.Producto;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface ProductoDao extends JpaRepository<Producto, Long> {
+
+    //Ejemplo 1 de un metodo utilizando metodos Query
+    public List<Producto> findByPrecioBetweenOrderByDescripcion(
+            double precioInf, double precioSup);
+
+    //Ejemplo 2 de un metodo utilizando metodos Query
+    @Query(value = "SELECT a FROM Producto a where a.precio between :precioInf AND :precioSup ORDER BY a.descripcion ASC")
+    public List<Producto> consultaJPQL(
+            double precioInf, double precioSup);
+
+    //Ejemplo 3 de un metodo utilizando metodos Query
+    @Query(nativeQuery = true, value = "SELECT a FROM Producto a where producto.precio between :precioInf AND :precioSup ORDER BY a.descripcion ASC")
+    public List<Producto> consultaSQL(
+            double precioInf, double precioSup);
+
+}

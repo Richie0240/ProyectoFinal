@@ -1,0 +1,71 @@
+<!-- comment -->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Gymplements</title>
+    </head>
+    <body>
+
+
+
+        <!-- 1 Seccion para crear los tabs -->
+        <section th:fragment="categoriasTabs" id="categorias">
+                       <div>
+                <img src="https://pruebasadk.com/drupal/core/proyecto/banner.png" class="img-fluid" alt="Responsive image"/>
+            </div>
+            <br/>
+            <h3 class="text-center" style="color: #FEDA15">Suplementos, accesorios y mas</h3>
+            <br/>
+
+
+
+
+
+        </section>
+
+        <!-- 2 Sección principal para mostrar la informaccion de los productos seleccionados -->
+        <section th:fragment="listadoProductos" id="productos">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div th:if="${productos != null and !productos.empty}">
+
+                            <div class="row row-cols-4">
+                                <div class="card" th:each="p : ${productos}">
+                                    <figure>
+                                        <img th:src="${p.rutaImagen}"
+                                             class="card-img-top" 
+                                             height="300px">
+
+                                            <figcaption>¢[[${p.precio}]] </figcaption>
+                                    </figure>
+                                    <div class="card-header">
+                                        <p class="card-title">[[${p.descripcion}]]</p>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <p class="card-text">[[${p.detalle}]]</p>
+                                        <button class="btn btn-dark"><i class="fas fa-cart-plus"></i> Añadir al carrito</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="text-center p-2" th:if="${productos == null or productos.empty}">
+                            <span>[[#{lista.vacia}]]</span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
